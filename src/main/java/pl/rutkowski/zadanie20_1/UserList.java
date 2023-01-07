@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public class UserList {
-    List<User> userList = new ArrayList<>();
+    private final List<User> userList = new ArrayList<>();
 
     public UserList() {
         userList.add(new User("Jan", "Kowalski", 30));
@@ -17,5 +17,9 @@ public class UserList {
 
     public List<User> getAll() {
         return userList;
+    }
+
+    public void add(User user) {
+        userList.add(user);
     }
 }

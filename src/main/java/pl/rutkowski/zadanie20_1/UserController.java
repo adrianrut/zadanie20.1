@@ -1,6 +1,5 @@
 package pl.rutkowski.zadanie20_1;
 
-import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +10,11 @@ import java.util.Objects;
 @Controller
 public class UserController {
 
-    @Resource
-    private UserList userList;
+    private final UserList userList;
+
+    public UserController(UserList userList) {
+        this.userList = userList;
+    }
 
     @GetMapping("/user")
     @ResponseBody
@@ -27,7 +29,7 @@ public class UserController {
         if (Objects.equals(firsName, "") || Objects.equals(lastName, "")) {
             return "redirect:/err.html";
         }
-        userList().add(new User(firsName, lastName, age));
+        userList.add(new User(firsName, lastName, age));
         return "redirect:/success.html";
 
     }
